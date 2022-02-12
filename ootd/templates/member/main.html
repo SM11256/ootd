@@ -1,0 +1,14 @@
+<!-- /templates/member/main.html : 마이페이지 이동전 로그인상태 확인  -->
+{% if request.session.login %} {# 로그인 된 경우 #}
+    <script>
+        location.href='../info/{{request.session.login}}/'
+    </script>    
+
+{% else %}  {# 로그인 안된 경우 #}
+    <script>
+        location.href='../login/'
+    </script>
+{% endif %}
+ 
+
+

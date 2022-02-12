@@ -1,0 +1,36 @@
+{% extends "base1.html" %}
+<!-- /templates/member/list.html : 회원목록 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}회원 목록 보기{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>회원 목록</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../info/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../update/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../pwupdate/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href="></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../../clothes/list/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../logout'"></td></tr>
+            </tabel>
+            <table id="userlist">
+                <tr><th>아이디</th><th>사진</th><th>별명</th><th>이메일</th><th>연락처</th><th>생년월일</th><th>성별</th><th>강제탈퇴</th></tr>
+                {% for m in mlist %}
+                <tr><td><a href="../info/{{m.mem_id}}/">{{m.mem_id}}</a></td>
+                    <td><img src="/file/picture/{{m.picture}}" width="30" height="45"></td>
+                    <td>{{m.nick}}</td><td>{{m.email}}</td><td>{{m.tel}}</td><td>{{m.birth|date:'Y-m-d'}}</td>
+                    <td>{% if m.gender == 1 %} 남 {% else %} 여 {% endif %}</td>
+                    <td>{% if m.mem_id != 'admin' %}
+                        <a href="../admindelete/{{m.mem_id}}/"><i class="fas fa-user-slash"></i></a>{% endif %}</td></tr>
+                {% endfor %}
+            </table></div>
+    {% endblock %}
+    </body>
+</html>
+
+

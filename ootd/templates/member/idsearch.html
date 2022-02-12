@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+        @font-face {
+            font-family: 'ONE-Mobile-POP';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        #idsearch-table{
+            margin:20px auto;
+            padding:20px;
+        }
+        #idsearch-comment, .idsearch-info {padding: 10px 10px 10px 0;}
+        .idsearch-info > label{margin-right:20px;}
+        #idsearch-title{
+            color:#bcbcbc;
+            font-family: 'ONE-Mobile-POP';
+            font-size:2em;
+        }
+        #idsearch-comment{
+            color:#bcbcbc;
+        }
+        #idsearch-sub{padding-top:20px;}
+        </style>
+    </head>
+    <body>
+    {% block content %}
+        <form action="../idsearch/" method="post" name="f">
+        {% csrf_token %}
+            <table id="idsearch-table"><caption id="idsearch-title">아이디 찾기</caption>
+                <tr><td id="idsearch-comment" colspan="2">이메일과 전화번호, 생년월일을 입력해주세요.</td></tr>
+                <tr><td class="idsearch-info" colspan="2"><label>이메일&nbsp;&nbsp;&nbsp;</label><input type="text" name="email" placeholder="abc@naver.com"></td></tr>
+                <tr><td class="idsearch-info" colspan="2"><label>연락처&nbsp;&nbsp;&nbsp;</label><input type="text" name="tel"  placeholder="'-'제외, 숫자만 입력"></td></tr>
+                <tr><td class="idsearch-info" colspan="2"><label>생년월일</label><input type="date" name="birth"  placeholder="0000-00-00"></td></tr>
+                <tr></tr>
+                <tr><td id="idsearch-sub" colspan="2"><input type="submit" value="아이디 찾기"></td></tr>
+                <tr></tr>
+            </table>
+        </form>
+    {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!-- /templates/member/pictureform.html : 사진업로드 화면 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}회원사진 등록{% endblock %}</title>
+        <link rel="stylesheet" href="../../static/css/main.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body>
+        <h3 id="pic-title">프로필 사진 등록</h3>
+        <table id="pic-table">
+        
+            <tr><td><img id="preview" src="../../static/img/ootdBasic.jpg" width="300" height="340"></td></tr>
+            <tr><td><form action="../picture/" method="post" enctype="multipart/form-data">
+                {%  csrf_token  %}
+                <input type="file" name="picture" id="imageFile" accept="img/*" ></td></tr>
+            <tr><td>
+                <input type="submit" value="사진 등록"  class="w3-button w3-light-grey w3-hover-grey" style="width:100px"></form></td></tr>
+                
+        </table>  
+        
+    <!-- 사진 이미지 가져오기 -->
+    <script type="text/javascript">
+        let imagefile = document.querySelector('#imageFile'); //input의 file 태그
+        let preview = document.querySelector('#preview');     //img 태그
+        
+        // imagefile 태그의 onchange 이벤트 발생 등록.
+        
+        imagefile.addEventListener('change', function(e) {
+          let get_file = e.target.files;  //선택된 이미지 파일
+          let reader = new FileReader();  //파일선택.
+          reader.onload = (function (Img) { //Img : 이미지 태그
+            return function(e) {
+        	  Img.src = e.target.result;
+            }
+          })(preview);
+          if(get_file){   reader.readAsDataURL(get_file[0]);  } //이미지가 있으면 원래 이미지 url가져와(미리보기)
+        });
+        
+
+        
+        
+    </script>
+
+    </body>

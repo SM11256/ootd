@@ -1,0 +1,52 @@
+{% extends "base1.html" %}
+<!-- /templates/member/pwupdate.html : 비밀번호 변경 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}비밀번호 변경{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>비밀번호 변경</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../info/{{mem.mem_id}}'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../update/{{mem.mem_id}}/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href="></td></tr>
+        {% if request.session.login == 'admin' %} {# 관리자로 로그인 된 경우 #}
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href='../../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../../../clothes/list'"></td></tr>
+        {% else %} {# 회원 로그인 된 경우 #}
+                <tr><td><input type="button" class="mypagebutton" value="회원탈퇴" onclick="location.href='../../delete/{{mem.mem_id}}/'"></td></tr>
+        {% endif %}
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../logout'"></td></tr>
+            </tabel>
+            <form action="../../pwupdate/{{mem.mem_id}}/" method="post" name="f" onsubmit="return inchk(this)">
+            {%  csrf_token  %}
+                <table id="mypage-info"><tbody class="update">
+                    <tr><th>현재 비밀번호</th><td><input type="password" name="pw"></td></tr>
+                    <tr><th>비밀번호</th><td><input type="password" name="chgpass"></td></tr>
+                    <tr><th>비밀번호 확인</th><td><input type="password" name="chgpass2"></td></tr>
+                    <tr><td colspan="2" class="btn" align="right">
+                        <input type="submit" value="비밀번호 변경" 
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="button" value="취소" onclick="location.href='../../info/{{mem.mem_id}}'" 
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>
+                </table></form></div>
+            
+    <!-- 변경 비밀번호와 변경비밀번호확인 일치 확인-->
+    <script type="text/javascript">
+        function inchk(f) {
+            if(f.chgpass.value != f.chgpass2.value) {
+                alert("변경 비밀번호와 변경 비밀번호 재입력이 다릅니다.");
+        		   f.chgpass2.value="";
+        		   f.chgpass2.focus();
+        		   return false;
+            }
+            return true;
+        }
+    </script>
+    {% endblock %}
+    </body>
+</html>

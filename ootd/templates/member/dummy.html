@@ -1,0 +1,26 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}HOME{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+        crossorigin="anonymous">
+    </head>
+    <body>
+        {% block content %}
+        <form action="../../clothes/result/" method="post" name="f">
+        {% csrf_token %}
+            <input type="hidden" name="m_gender" value="{{mem.gender}}" >
+            <input type="hidden" name="m_birth" value="{{mem.birth}}" >
+            <input type="hidden" name="m_date" value="{{odate}}" >
+            <input type="hidden" name="m_place" value="{{oplace}}" >
+        </form>
+        <script>
+            alert("{{msg}}")
+        </script>
+        {{ mic_to_text }}
+        {% endblock %}
+    </body>
+</html>

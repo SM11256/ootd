@@ -1,0 +1,68 @@
+{% extends "base1.html" %}
+<!-- /templates/member/update.html : 가입정보 변경 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}가입정보 변경{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>내 정보 변경</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../info/{{mem.mem_id}}'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton"  value="정보변경" onclick="location.href="></td></tr>
+                <tr><td><input type="button" class="mypagebutton"  value="비밀번호변경" onclick="location.href='../../pwupdate/{{mem.mem_id}}/'"></td></tr>
+        {% if request.session.login == 'admin' %} {# 관리자로 로그인 된 경우 #}
+                <tr><td><input type="button" class="mypagebutton"  value="회원관리" onclick="location.href='../../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton"  value="옷장관리" onclick="location.href='../../../clothes/list'"></td></tr>
+        {% else %} {# 회원 로그인 된 경우 #}
+                <tr><td><input type="button" class="mypagebutton"  value="회원탈퇴" onclick="location.href='../../delete/{{mem.mem_id}}/'"></td></tr>
+        {% endif %}
+                <tr><td><input type="button" class="mypagebutton"  value="로그아웃" onclick="location.href='../../logout'"></td></tr>
+            </tabel>
+            <form action="../../update/{{mem.mem_id}}/" name="f" method="post"  onsubmit="return inputcheck(this)">
+            {% csrf_token %}
+                <input type="hidden" name="picture" value="{{mem.picture}}">
+                <input type="hidden" name="mem_id" value="{{mem.mem_id}}">
+                <input type="hidden" name="gender" value="{{mem.gender}}">
+                <table id="mypage-info"><tbody class="update">
+     
+                    <tr><th>아이디</th><td>{{mem.mem_id}}</td></tr>
+                    <tr><th>별명</th><td><input type="text" name="nick" value="{{mem.nick}}"></td></tr>
+                    <tr><th>비밀번호</th><td><input type="password" name="pw" ></td></tr>
+                    <tr><th>이메일</th><td><input type="text" name="email" value="{{mem.email}}"></td></tr>
+                    <tr><th>전화번호</th><td><input type="text" name="tel" value="{{mem.tel}}"></td></tr>
+                    <tr><th>생년월일</th><td><input type="date" name="birth" value="{{mem.birth|date:'Y-m-d'}}"></td></tr>
+                    <tr><th>성별</th>
+                        {% if mem.gender == 1 %}
+                        <td>남자</td>{% endif %}
+                        {% if mem.gender == 2 %}
+                        <td>여자</td>{% endif %}</tr>
+                    <tr><th rowspan="2">사진</th>
+                        <td class="pictd"><img src="/file/picture/{{mem.picture}}" width="150" height="170" id="pic"></td></tr>
+                        <tr><td class="picupdate"><a href="javascript:win_upload()">사진변경</a></td></tr>
+                    <tr><td colspan="2" class="btn" align="right">
+                        <input type="submit" value="수정" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="button" value="취소" onclick="location.href='../../info/{{mem.mem_id}}'"
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>
+                </table></form></div>
+           
+    <!-- 비밀번호확인 유효성검사 / 사진변경 새창으로 열어주기 -->
+    <script type="text/javascript">
+        function inputcheck(f) {
+            if(f.pw.value == "") {
+                alert("비밀번호를 입력하세요");
+            		f.pw.focus();
+            		return false;
+            }
+        }
+        function win_upload() {
+             var op = "width=480, height=580, left=50,top=100";
+             open("../picture/","",op);
+        }
+    </script>
+    {% endblock %}
+    </body>
+</html>

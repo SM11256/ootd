@@ -1,0 +1,53 @@
+{% extends "base2.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}로그인{% endblock %}</title>
+
+    </head>
+    <body>
+    {% block content %}
+        <form action="../login/" method="post" name="f">
+        {% csrf_token %}
+            <div class="modal fade" id="myModalID" role="dialog"> <!-- id명 -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                             <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h4 class="modal-title">모달 창 타이틀</h4> <!-- 타이틀 -->
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="user-total"><caption>로그인</caption>
+                <tr><td colspan="2" class="info">가입하신 OOTD 아이디와 비밀번호를 입력해주세요.</td></tr>
+                <tr><td colspan="2" class="input-mem"><i class="fas fa-user"></i><input type="text" name="mem_id" placeholder="아이디"></td></tr>
+                <tr><td colspan="2" class="input-mem"><i class="fas fa-lock"></i><input type="password" name="pw" placeholder="비밀번호"></td></tr>
+                <tr><td colspan="2" class="error">{{msg}}</td></tr>
+                <tr><td colspan="2" ><input type="submit" value="로그인" class="w3-button w3-light-grey w3-hover-grey" style="width:450px"></td></tr>
+                <tr><td colspan="2">
+                    <input type="button" value="아이디 찾기" data-remote="../idsearch/" data-toggle="modal" data-target="#myModalID">&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <input type="button" value="비밀번호 찾기" data-remote="../pwsearch/" data-toggle="modal" data-target="#myModalID">&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <input type="button" value="회원가입" onclick="location.href='../agreement/'"></td></tr>
+            </table>
+            <div id="log-search-er">
+            <p class="log-search-er">{{m_msg}}</p>
+            </div>
+        </form>
+        <script>
+        $('#myModalID').on('show.bs.modal', function(e) {
+            var button = $(e.relatedTarget);
+            var modal = $(this);
+            modal.find('.modal-body').load(button.data("remote"));
+        });
+        </script>
+    {% endblock %}
+    </body>
+</html>

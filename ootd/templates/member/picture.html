@@ -1,0 +1,7 @@
+<!-- templates/picture.html  -->
+<script type="text/javascript">
+   img = opener.document.getElementById("pic");
+   img.src = "/file/picture/{{fname}}";
+   opener.document.f.picture.value="{{fname}}";
+   self.close();
+</script>

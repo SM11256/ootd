@@ -1,0 +1,56 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}옷장 삭제{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>옷장 정보 삭제</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../../member/info/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../../member/update/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../../member/pwupdate/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href='../../../member/list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../../member/logout'"></td></tr>
+            </tabel>
+     
+            <form action="../../delete/{{clo.c_id}}/" method="post">
+            {% csrf_token %}
+                <table id="mypage-info"><tbody class="info">
+                    <tr><td rowspan="6" class="pictd"><img src="/file/c_pic/{{clo.c_pic}}" width="250" height="250" id="pic">
+                        <br><br><br><br><br></td>
+                        <th>성별</th>
+                        <td>{% if clo.gender == 0 %}무관{% endif %}
+                            {% if clo.gender == 1 %}남성{% endif %}
+                            {% if clo.gender == 2 %}여성 {% endif %}</td></tr>
+                    <tr><th>연령대</th>
+                        <td>{% if clo.age == 0 %} 무관 {% endif %}
+                            {% if clo.age == 1 %} 청소년(~16) {% endif %}
+                            {% if clo.age == 2 %} 청년(17~39) {% endif %}
+                            {% if clo.age == 3 %} 중장년(40~) {% endif %}</td></tr>              
+                    <tr><th>기온</th>
+                        <td>{% if clo.temp == 1 %} 추움(~4) {% endif %}
+                            {% if clo.temp == 2 %} 보통(5~8) {% endif %}
+                            {% if clo.temp == 3 %} 따듯(9~) {% endif %}</td></tr>
+                    <tr><th>종류</th>
+                        <td>{% if clo.kind == 0 %} 무관 {% endif %}
+                            {% if clo.kind == 1 %} 상의 {% endif %}
+                            {% if clo.kind == 2 %} 하의 {% endif %}
+                            {% if clo.kind == 3 %} 신발 {% endif %}</td></tr>
+                    <tr><th>회원여부</th>
+                        <td>{% if clo.state == 0 %} 비회원 {% endif %}
+                            {% if clo.state == 1 %} 회원 {% endif %}</td></tr>
+                    <tr><td colspan="2" class="btn" align="right">
+                        <input type="submit" value="삭제" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="button" value="취소" onclick="location.href='../../list/'" 
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>  
+                </table></form></div>  
+
+    {% endblock %}
+    </body>
+</html>
+

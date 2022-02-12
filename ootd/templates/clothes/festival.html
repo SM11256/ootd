@@ -1,0 +1,25 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}OOTD{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+        crossorigin="anonymous">
+    </head>
+    <body>
+    {% block content %}
+    <div id="map_season"> <div id="map-season-title"><p>{{f_name}} <span>&nbsp;{{f_days}}&nbsp;</span></p></div> {{map_season|safe}} </div>
+    
+    {% endblock %}
+    </body>
+</html>
+
+
+
+
+
+
+
+

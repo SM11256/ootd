@@ -1,0 +1,40 @@
+{% extends "base1.html" %}
+<!-- /templates/member/info.html : 마이페이지 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}마이페이지{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>내 정보 보기</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href="></td></tr>
+                <tr><td><input type="button"  class="mypagebutton" value="정보변경" onclick="location.href='../../update/{{mem.mem_id}}/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../pwupdate/{{mem.mem_id}}/'"></td></tr>
+        {% if request.session.login == 'admin' %} {# 관리자로 로그인 된 경우 #}
+                <tr><td><input type="button"  class="mypagebutton" value="회원관리" onclick="location.href='../../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../../../clothes/list'"></td></tr>
+        {% else %} {# 회원 로그인 된 경우 #}
+                <tr><td><input type="button"  class="mypagebutton" value="회원탈퇴" onclick="location.href='../../delete/{{mem.mem_id}}/'"></td></tr>
+        {% endif %}
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../logout'"></td></tr>
+            </tabel>              
+            <table id="mypage-info"><tbody class="info">
+                <tr><td rowspan="6" class="pictd"><img src="/file/picture/{{mem.picture}}" alt="프로필사진" width="300" height="340"  id="pic"></td>
+                    <th>아이디</th><td>{{mem.mem_id}}</td></tr>
+                <tr><th >별명</th><td>{{mem.nick}}</td></tr>                
+                <tr><th >이메일</th><td>{{mem.email}}</td></tr>
+                <tr><th>연락처</th><td>{{mem.tel}}</td></tr>
+                <tr><th>생년월일</th><td>{{mem.birth|date:'Y-m-d'}}</td></tr>
+                <tr><th>성별</th><td>{% if mem.gender == 1 %} 남자
+                                     {% else %} 여자
+                                     {% endif %}</td></tr></tbody>
+
+            </table></div>
+    {% endblock %}
+    </body>
+</html>
+

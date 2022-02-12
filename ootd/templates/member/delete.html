@@ -1,0 +1,46 @@
+{% extends "base1.html" %}
+<!-- /templates/member/delete.html : 회원탈퇴 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}회원 탈퇴{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>회원 탈퇴</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../info/{{mem.mem_id}}'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../update/{{mem.mem_id}}/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../pwupdate/{{mem.mem_id}}/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원탈퇴" onclick="location.href="></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../logout'"></td></tr>
+            </tabel>
+        <form action="../../delete/{{mem.mem_id}}/" method="post" onsubmit="return inputcheck(this)">
+        {%  csrf_token  %}
+            <table id="mypage-info"><tbody class="delete">
+                <tr><th>아이디</th><td>{{mem.mem_id}}</td></tr>
+                <tr><th>별명</th><td>{{mem.nick}}</td></tr>                
+                <tr><th>비밀번호</th><td><input type="password" name="pw"></td></tr>
+                <tr><td colspan="2" class="btn" align="right">
+                    <input type="submit" value="탈퇴" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                    <input type="button" value="취소" onclick="location.href='../../info/{{mem.mem_id}}'"
+                        class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>
+            </table></div>
+    <!-- 비밀번호 유효성 검사-->
+    <script type="text/javascript">
+        function inputcheck(f) {
+            if(f.pw.value == "") {
+        		  alert("비밀번호를 입력하세요")
+        		  f.pw.focus();
+        		  return false;
+            }
+            return true;
+        }
+    </script>
+    {% endblock %}
+    </body>
+</html>
+
+

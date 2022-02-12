@@ -1,0 +1,57 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}OOTD{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+        crossorigin="anonymous">
+    </head>
+    <body>
+    {% block content %}
+        <div id="home-header">
+            <h1 id="home-title">
+              <span class="home-span" style="color:#FF9999;">O</span>
+              <span class="home-span" style="color:#FFCC99;">O</span>
+              <span class="home-span" style="color:#FFFF99;">T</span>
+              <span class="home-span" style="color:#CCFF99;">D</span>
+            </h1>
+        </div>
+        <div id="home-wrap">
+            <form action="/member/result/" method="post" name="f">
+            {% csrf_token %}
+            <input type="date" id="home-ootd-date" name="ootd-date" value="2022-03-01" min="2022-03-01" max="2022-04-30">
+            <select id="home-ootd-place" name="ootd-place">
+                <option value="seoul" selected>윤종로벚꽃길(서울 영등포구 여의도동)</option>
+                <option value="busan">해운대 달맞이길(부산 해운대구 달맞이길 190)</option>
+                <option value="daegu">수성못(대구 수성구 두산동)</option>
+                <option value="jeju">한라수목원(제주 제주시 수목원길 72)</option>
+                <option value="yeosu">거북선공원(전남 여수시 거북선공원2길 10)</option>
+                <option value="jeonju">전주덕진공원(전북 전주시 덕진구 권삼득로 390 전주덕진공원)</option>
+                <option value="cheongju">무심천(충북 청주시 상당구 남일면 신송리)</option>
+                <option value="daejeon">보문산(대전 중구 대사동)</option>
+                <option value="incheon">인천대공원(인천 남동구 장수동)</option>
+            </select>
+            <input id="home-ootd-search" type="submit" value="검색">
+            </form>
+            <br>
+            <span id="home-info">날짜와, 지역을 선택해서 검색해주세요!</span>
+        </div>
+        <form action="/member/record/" method="post" name="g">
+            <div id="home-m-search">
+            <a href="../member/record/"><i class="fas fa-microphone"></i></a>
+            </div>
+            <!--<input id="home-m-search" type="button" value="음성인식" onclick="location.href='../member/record/'">-->
+        </form>
+    {% endblock %}
+    </body>
+</html>
+
+
+
+
+
+
+
+

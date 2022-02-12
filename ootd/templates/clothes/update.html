@@ -1,0 +1,66 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}옷장 수정{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>옷장 정보 수정</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../../member/info/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../../member/update/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../../member/pwupdate/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href='../../../member/list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../../member/logout'"></td></tr>
+            </tabel>
+     
+            <form action="../../update/{{clo.c_id}}/" name="f" method="post">
+            {% csrf_token %}
+                <input type="hidden" name="c_pic" value="{{clo.c_pic}}">
+                <input type="hidden" name="c_id" value="{{clo.c_id}}">
+                <table id="mypage-info"><tbody class="info">
+                    <tr><td rowspan="6" class="pictd"><img src="/file/c_pic/{{clo.c_pic}}" width="250" height="250" id="pic"><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:win_upload()">사진수정</a><br><br><br><br><br></td>
+                        <th>성별</th>
+                        <td><input type="radio" name="gender" value="0" {% if clo.gender == 0 %} checked {% endif %}>무관
+                            <input type="radio" name="gender" value="1" {% if clo.gender == 1 %} checked {% endif %}>남성
+                            <input type="radio" name="gender" value="2" {% if clo.gender == 2 %} checked {% endif %}>여성</td></tr>
+                    <tr><th>연령대</th>
+                        <td><input type="radio" name="age" value="0" {% if clo.age == 0 %} checked {% endif %}>무관
+                            <input type="radio" name="age" value="1" {% if clo.age == 1 %} checked {% endif %}>청소년(~16)
+                            <input type="radio" name="age" value="2" {% if clo.age == 2 %} checked {% endif %}>청년(17~39)
+                            <input type="radio" name="age" value="3" {% if clo.age == 3 %} checked {% endif %}>중장년(40~)</td></tr>              
+                    <tr><th>기온</th>
+                        <td><input type="radio" name="temp" value="1" {% if clo.temp == 1 %} checked {% endif %}>추움(~4)
+                            <input type="radio" name="temp" value="2" {% if clo.temp == 2 %} checked {% endif %}>보통(5~8)
+                            <input type="radio" name="temp" value="3" {% if clo.temp == 3 %} checked {% endif %}>따듯(9~)</td></tr>
+                    <tr><th>종류</th>
+                        <td><input type="radio" name="kind" value="0" {% if clo.kind == 0 %} checked {% endif %}>무관
+                            <input type="radio" name="kind" value="1" {% if clo.kind == 1 %} checked {% endif %}>상의
+                            <input type="radio" name="kind" value="2" {% if clo.kind == 2 %} checked {% endif %}>하의
+                            <input type="radio" name="kind" value="3" {% if clo.kind == 3 %} checked {% endif %}>신발</td></tr>
+                    <tr><th>회원여부</th>
+                        <td><input type="radio" name="state" value="0" {% if clo.state == 0 %} checked {% endif %}>비회원
+                            <input type="radio" name="state" value="1" {% if clo.state == 1 %} checked {% endif %}>회원</td></tr>
+                    <tr><td colspan="2" class="btn" align="right">
+                        <input type="submit" value="수정" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="button" value="취소" onclick="location.href='../../list/'" 
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>  
+                </table></form></div>  
+
+    <script type="text/javascript">
+       function win_upload(){
+    	   var op = "width=500,height=150,left=50, top=150";
+    	   open("../../c_pic/","",op);
+       }
+    </script>
+    {% endblock %}
+    </body>
+</html>
+

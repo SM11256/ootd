@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="/file/picture/logo_icon.ico" rel="shortcut icon" type="image/x-icon">
+<title>{% block title %}OOTD{% endblock %}</title>
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-border w3-opacity" id="myNavbar">
+    <a href="http://localhost:8000/" class="w3-bar-item w3-button">
+        <span id="base-logo" style="color:#FF9999;">O</span>
+        <span id="base-logo" style="color:#FFCC99;">O</span>
+        <span id="base-logo" style="color:#FFFF99;">T</span>
+        <span id="base-logo" style="color:#CCFF99;">D</span>
+    </a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      {%if request.session.login %}
+      <a href="/member/logout" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 로그아웃</a>
+      <a href="/member/main" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 마이페이지</a>
+      {% if request.session.login == 'admin'%}
+      <a href="/member/list" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 회원관리</a>
+      {% endif %}
+      {% else %}
+      <a href="/member/login" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 로그인</a>
+      <a href="/member/agreement" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 회원가입</a>
+      {% endif %}
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-text-grey w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  {%if request.session.login %}
+  <a href="/member/logout" onclick="w3_close()" class="w3-bar-item w3-button">로그아웃</a>
+  <a href="/member/main" onclick="w3_close()" class="w3-bar-item w3-button"><a>마이페이지</a>
+  {% if request.session.login == 'admin'%}
+  <a href="/member/list" onclick="w3_close()" class="w3-bar-item w3-button">회원관리</a>
+  {% endif %}
+  {% else %}
+  <a href="/member/login" onclick="w3_close()" class="w3-bar-item w3-button">로그인</a>
+  <a href="/member/agreement" onclick="w3_close()" class="w3-bar-item w3-button">회원가입</a>
+  {% endif %}
+</nav>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1600px">
+
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" style="padding:50px 16px">
+  <div class="w3-padding-32">
+    <div class="w3-bar w3-border">
+      <a href="http://localhost:8000/" class="w3-bar-item w3-button w3-light-grey">OOTD</a>
+      <a href="/clothes/festival/spring" class="w3-bar-item w3-button">&nbsp;&nbsp;봄 축제&nbsp;&nbsp;</a>
+      <a href="/clothes/festival/summer" class="w3-bar-item w3-button">여름 축제</a>
+      <a href="/clothes/festival/fall" class="w3-bar-item w3-button">가을 축제</a>
+      <a href="/clothes/festival/winter" class="w3-bar-item w3-button w3-hide-small">겨울 축제</a>
+    </div>
+  </div>
+</header>
+
+<!-- Photo Grid 페이지 내용 -->
+<div class="w3-row-padding" style="margin-bottom:50px">
+  {% block content %}{% endblock %}
+</div>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Made by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">ootd</a></p>
+</footer>
+
+<script>
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+
+</body>
+</html>

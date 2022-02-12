@@ -1,0 +1,57 @@
+{% extends "base1.html" %}
+<!-- /templates/member/join.html : 회원가입화면 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}회원가입{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+        <form action="../join/" method="post" name="f">
+        {% csrf_token %}
+            <input type="hidden" name="picture" value="" >
+            <table id="user-total"><caption>회원가입</caption>
+                <tr><td colspan="2" class="info">필수 항목을 입력해주시고 가입절차를 진행해주세요.</td></tr>
+                <tr><th>아이디</th><td class="input-mem"><input type="text" name="mem_id" placeholder="아이디 입력"></td></tr>
+                <tr><td></td><td class="error">{{msg}}{{id_error}}</td></tr>
+                <tr><th>별명</th><td class="input-mem"><input type="text" name="nick" placeholder="별명 입력"></td></tr>
+                <tr><td></td><td class="error">{{name_error}}</td></tr>
+                <tr><th>비밀번호</th><td class="input-mem"><input type="password" name="pw" placeholder="비밀번호 입력"></td></tr>
+                <tr><td></td><td class="error">{{pass_error}}</td></tr>
+                <tr><th>비밀번호 확인</th><td class="input-mem"><input type="password" name="pwChck" placeholder="비밀번호 입력"></td></tr>
+                <tr><td></td><td class="error">{{pass_error}}</td></tr>
+                <tr><th>이메일</th><td class="input-mem"><input type="text" name="email" placeholder="abc@naver.com"></td></tr>
+                <tr><td></td><td class="error">{{email_error}}</td></tr>
+                <tr><th>전화번호</th><td class="input-mem"><input type="text" name="tel"  placeholder="'-'제외, 숫자만 입력"></td></tr>
+                <tr><td></td><td class="error">{{tel_error}}</td></tr>
+                <tr><th>생년월일</th><td class="input-mem"><input type="date" name="birth"  placeholder="0000-00-00"></td></tr>
+                <tr><td></td><td class="error">{{birth_error}}</td></tr>
+                <tr><th>성별</th>
+                    <td class="radiobax"><input type="radio" name="gender" value="1" checked>&nbsp;&nbsp;남&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="gender" value="2">&nbsp;&nbsp;여</td></tr>
+                <tr><th>사진</th>
+                    <td><div class="w3-card" style="width:35%"><img src="../../static/img/ootdBasic.jpg" alt="Person" width="150" height="170" id="pic">
+                            <div class="w3-container"><a href="javascript:win_upload()">사진등록</a></div></div></td></tr>
+                <tr><td colspan="2" >
+                    <input type="submit" value="가입" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                    <input type="reset" value="초기화" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                    <input type="button" value="취소" onclick="location.href='../login/'" class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr>
+
+            </table>  
+        </form>
+        
+    <!-- 사진등록 새창으로 열어주기 -->
+    <script type="text/javascript">
+        function win_upload() {
+             var op = "width=480, height=580, left=50,top=100";
+             open("../picture/","",op);
+        }
+    </script>
+    {% endblock %}
+    </body>
+</html>
+
+
+
+

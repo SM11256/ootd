@@ -1,0 +1,42 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}OOTD{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+        crossorigin="anonymous">
+    </head>
+    <body>
+    {% block content %}
+    <div id="realresult">
+    <div id="map_ootd"> <div id="map-title"><p>{{m_place}} <span>&nbsp;{{m_date}}&nbsp;</span></p></div> {{map_ootd|safe}} </div>
+    
+    <div id="ootd-wrap">
+    <div id="ootd-title-wrap">
+        <div id="ootd-title">Outfit Of The Day</div>
+    </div> 
+    <div class="clo"><img src="/file/c_pic/{{top}}" id="clo-top"></div>
+    <div class="clo"><img src="/file/c_pic/{{bottom}}" id="clo-bottom"></div>
+    <div class="clo"><img src="/file/c_pic/{{shoes}}" id="clo-shoes"></div>
+    </div>
+    
+    <div id="graph-wrap">
+    <div id="graph-title"><p>날씨 예측 <span>&nbsp;체감온도 {{data}}°C&nbsp;</span></p></div>
+    <div id="graph-body">
+        <div id="graph-img1"><img src="{{src1}}"><p>년도별 {{days}} 산점도</p></div>
+        <div id="graph-img2"><img src="{{src2}}"><p>2021년 {{month}}월 예측/실제 데이터 비교</p></div>
+    </div>
+    </div>
+    {% endblock %}
+    </body>
+</html>
+
+
+
+
+
+
+
+

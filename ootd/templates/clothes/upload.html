@@ -1,0 +1,63 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}옷 등록{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>옷장 추가</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../member/info/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../member/update/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../member/pwupdate/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href='../../member/list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href='../list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../member/logout'"></td></tr>
+            </tabel>
+            
+            <form action="../upload/" method="post" name="f">
+            {% csrf_token %}
+                <input type="hidden" name="c_pic" value="" >
+                <table id="mypage-info"><tbody class="info">
+                    <tr><td rowspan="6" class="pictd"><img src="" width="250" height="250" id="pic"><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:win_upload()">사진등록</a><br><br><br><br><br></td>
+                        <th>성별</th><td><input type="radio" name="gender" value="0" checked>무관
+                                        <input type="radio" name="gender" value="1">남성
+                                        <input type="radio" name="gender" value="2">여성</td></tr>
+                    <tr><th >연령대</th><td><input type="radio" name="age" value="0" checked>무관
+                                            <input type="radio" name="age" value="1">청소년(~16)
+                                            <input type="radio" name="age" value="2">청년(17~39)
+                                            <input type="radio" name="age" value="3">중장년(40~)</td></tr>               
+                    <tr><th >기온</th><td><input type="radio" name="temp" value="1" checked>추움(~4)
+                                        <input type="radio" name="temp" value="2">보통(5~8)
+                                        <input type="radio" name="temp" value="3">따듯(9~)</td></tr>
+                    <tr><th>종류</th><td><input type="radio" name="kind" value="0" checked>무관
+                                        <input type="radio" name="kind" value="1">상의
+                                        <input type="radio" name="kind" value="2">하의
+                                        <input type="radio" name="kind" value="3">신발</td></tr>
+                    <tr><th>회원여부</th><td><input type="radio" name="state" value="0" checked>비회원
+                                            <input type="radio" name="state" value="1">회원</td></tr>
+                    <tr><td colspan="2" class="btn" align="right">
+                        <input type="submit" value="등록" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="reset" value="초기화" class="w3-button w3-light-grey w3-hover-grey" style="width:150px">
+                        <input type="button" value="취소" onclick="location.href='../list/'" 
+                            class="w3-button w3-light-grey w3-hover-grey" style="width:150px"></td></tr></tbody>  
+                </table></form></div>  
+
+    <script type="text/javascript">
+       function win_upload() {
+    	   var op = "width=500, height=500, left=50,top=150";
+    	   open("../c_pic/","",op);
+       }
+    </script>
+    {% endblock %}
+    </body>
+</html>
+
+
+

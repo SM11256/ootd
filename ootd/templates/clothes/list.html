@@ -1,0 +1,88 @@
+{% extends "base1.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}옷장 목록 보기{% endblock %}</title>
+    </head>
+    <body>
+    {% block content %}
+            <div id="mypage-total">
+            <h3>옷장 목록</h3>
+            <table id="mypage-menu">
+                <tr><td><input type="button" class="mypagebutton" value="가입정보" onclick="location.href='../../member/info/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="정보변경" onclick="location.href='../../member/update/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="비밀번호변경" onclick="location.href='../../member/pwupdate/admin/'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="회원관리" onclick="location.href='../../member/list'"></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="옷장관리" onclick="location.href="></td></tr>
+                <tr><td><input type="button" class="mypagebutton" value="로그아웃" onclick="location.href='../../member/logout'"></td></tr>
+            </tabel>
+
+            <table id="userlist">
+                <tr><th>번호</th><th>사진</th><th>성별</th><th>나이대</th>
+                    <th>기온</th><th>종류</th><th>회원여부</th><th><a href="../upload/">옷등록 <i class="fas fa-plus-square"></i></a></th></tr>
+                {% for c in clist %}
+                <tr><td><p>{{c.c_id}}</p></td>
+                    <td><img src="/file/c_pic/{{c.c_pic}}" width="45" height="45"></td>
+                    <td>
+                         {% if c.gender == 1 %}
+                            남성
+                         {% elif c.gender == 2 %}
+                            여성
+                         {% else %}
+                            무관
+                         {% endif %}
+                    </td>
+                    <td>
+                         {% if c.age == 1 %}
+                            청소년
+                         {% elif c.age == 2 %}
+                            청년
+                         {% elif c.age == 3 %}
+                            중장년
+                         {% else %}
+                            무관
+                         {% endif %}
+                    </td>
+                    <td>
+                         {% if c.temp == 1 %}
+                            추움(~4)
+                         {% elif c.temp == 2 %}
+                            보통(5~8)
+                         {% else %}
+                            따듯(9~)
+                         {% endif %}
+                    </td>
+                    <td>
+                         {% if c.kind == 1 %}
+                            상의
+                         {% elif c.kind == 2 %}
+                            하의
+                         {% elif c.kind == 3 %}
+                            신발
+                         {% else %}
+                            무관
+                         {% endif %}
+                    </td>
+                    <td>
+                         {% if c.state == 0 %}
+                            비회원
+                         {% else %}
+                            회원
+                         {% endif %}
+                    </td>
+                    <td><a href="../update/{{c.c_id}}/"><i class="fas fa-wrench"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="../delete/{{c.c_id}}/"><i class="fas fa-trash-alt"></i></a></td></tr>
+                {% endfor %}
+            </table></div>
+    {% endblock %}
+    </body>
+</html>
+
+
+
+
+
+
+
+

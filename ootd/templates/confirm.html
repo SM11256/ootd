@@ -1,0 +1,23 @@
+{% extends "base1.html" %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}HOME{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" \
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" \
+        crossorigin="anonymous">
+    </head>
+    <body>
+        {% block content %}
+        <form name="hidden" method="post" action="{{url}}">
+            {% csrf_token %}
+        </form> 
+        <script>
+            alert("{{msg}}")
+            document.hidden.submit();
+        </script>
+        {% endblock %}
+    </body>
+</html>
+
+
