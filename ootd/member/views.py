@@ -3,11 +3,11 @@ from django.http import HttpResponseRedirect
 from .models import Member
 from django.contrib import auth # 로그아웃
 from django.db.models import Q
-from konlpy.tag import Hannanum
+from konlpy.tag import Kkma
 import speech_recognition as sr
 import datetime as dt
 
-han = Hannanum()
+kkma = Kkma()
 word_list=list()
 index_list=list()
 alnum_list = list()
@@ -37,8 +37,8 @@ def record(request) :
 # 변환된 문자열 처리
 def processing(request, mic_to_text) :
     if request.method == 'POST' :
-        han = Hannanum()
-        print(han.nouns(mic_to_text))
+        kkma = Kkma()
+        print(kkma.nouns(mic_to_text))
         word_list=[]
         index_list=[]
         alnum_list =[]
@@ -49,9 +49,9 @@ def processing(request, mic_to_text) :
         date=""
         year="2022"
         min_date = dt.datetime(2022, 3, 1)
-        max_date = dt.datetime(2022, 4, 3)
+        max_date = dt.datetime(2022, 4, 30)
         
-        for item in han.nouns(mic_to_text) :
+        for item in kkma.nouns(mic_to_text) :
             word_list.append(item)
     
         i = 1
@@ -85,7 +85,7 @@ def processing(request, mic_to_text) :
 
         place_list = {
             "윤종로 벚꽃길(서울 영등포구 여의도동)":'seoul',
-            "해운대 달맞이길(부산 해운대구 달맞이길 190":'busan',
+            "해운대 달맞이길(부산 해운대 달맞이길 190":'busan',
             "수성못 (대구 수성구 두산동)":'daegu',
             "한라 수목원 (제주 제주시 수목원길 72)":'jeju',
             "거북선 공원 (전남 여수시 거북선공원2길 10)":'yeosu',
@@ -104,13 +104,13 @@ def processing(request, mic_to_text) :
         
         for word in word_list :
             for place in place_list :
-                if (word != '벚꽃' and (word in place)) :
+                if (word != '벚꽃' and word != '공원' and len(word) > 1 and (word in place)) :
                     oplace = place
                     break
-            if oplace == "" :
-                oplace ="목적지 미설정"
-                context = {"msg":"장소 정보 오류입니다. 다시 말씀해주세요.", "url":"../../"}
-                return render(request, "alert.html", context)
+        if oplace == "" :
+            oplace ="목적지 미설정"
+            context = {"msg":"장소 정보 오류입니다. 다시 말씀해주세요.", "url":"../../"}
+            return render(request, "alert.html", context)    
   
         if year != '' and (int(year) > 2022 or int(year) < 2022) :
             year = "2022"    
